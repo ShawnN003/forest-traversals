@@ -139,6 +139,7 @@ public class TreeProblems {
 
     int sum = 0;
     for (Integer node : tree.keySet()) {
+      sum+=node;
 
       if(tree != null)
       {
