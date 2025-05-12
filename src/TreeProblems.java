@@ -28,22 +28,16 @@ public class TreeProblems {
    If the root is null, do nothing.
    */
   public static <T> void postOrder(Node<T> root) {
+
     if(root == null) return;
+    else{
+      List<Node<T>> children = root.children;
 
-    if(root == null || tree.containsKey(current)) return;
-
-    System.out.println(current);
-
-    List<T> children = tree.get(current);
-    if(children != null)
-    {
-      for(T child : children)
-      {
-        preOrderMap(tree, child);
+      for (Node<T> node : children) {
+        postOrder(node); 
       }
     }
-
-
+    System.out.println(root.value);
   }
 
   /*
