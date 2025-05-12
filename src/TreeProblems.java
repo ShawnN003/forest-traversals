@@ -176,6 +176,7 @@ public class TreeProblems {
    Hint: No recursion needed! Think about how you would do this by hand.
   */
   public static <T> T findRoot(Map<T, List<T>> tree) {
+        T value = 0;
         Set<T> children = new HashSet<>();
 
         for (List<T> list : tree.values()) {
@@ -187,11 +188,11 @@ public class TreeProblems {
 
     for (T parent : tree.keySet()) {
         if (!children.contains(parent)) {
-            return parent; 
+            value = parent;
         }
     }
+    return value;
 
-    return children;
   }
 
   /*
