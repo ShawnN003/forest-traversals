@@ -176,7 +176,6 @@ public class TreeProblems {
    Hint: No recursion needed! Think about how you would do this by hand.
   */
   public static <T> T findRoot(Map<T, List<T>> tree) {
-        T value = 0;
         Set<T> children = new HashSet<>();
 
         for (List<T> list : tree.values()) {
@@ -188,10 +187,10 @@ public class TreeProblems {
 
     for (T parent : tree.keySet()) {
         if (!children.contains(parent)) {
-            value = parent;
+            return parent;
         }
     }
-    return value;
+    return null;
 
   }
 
@@ -214,7 +213,17 @@ public class TreeProblems {
    
   */
   public static <T> int maxDepth(Node<T> root) {
-    return -1;
+    if(root == null) return 0;
+
+    int max = 0;
+    for(Node<T> child : root.children)
+    {
+      int lowest = maxDepth(child);
+      if(lowest > max) {
+        max = lowest;
+      }
+    }
+    return max+1;
   }
 
   /*
@@ -235,7 +244,34 @@ public class TreeProblems {
 
    Hint: Use findRoot to start. Then, make a recursive helper method.
   */
-  public static int maxDepth(Map<String, List<String>> tree) {
-    return -1;
+  public static int help(Map<String, List<String>> tree, String root) {
+    if (!tree.containsKey(root) || tree.get(root).isEmpty()) {
+      return 1; 
   }
+
+  int max = 0;
+  for (String child : tree.get(root)) {
+      int depth = help(tree, child);
+      
+      if (depth > max) {
+          max = depth; 
+      }
+  }
+
+  return max + 1; 
+
+
+
+
+  }
+  public static int maxDepth(Map<String, List<String>> tree) {
+    if (tree == null || tree.isEmpty()) return 0;
+
+    String root = findRoot(tree);
+
+    return help(tree, root);
+
+  }
+
+
 }
